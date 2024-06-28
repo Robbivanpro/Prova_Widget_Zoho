@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+  <style>
+    .error-message { 
+      color: red; 
+      font-weight: bold;
+    }
+    .success-message {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h2>This is a sample Widget built using Zoho Extension toolkit.</h2>
+  <button id="test-button">Test Connessione Axios</button>
+  <div id="result-container"></div>
+
+  <script>
+    const testButton = document.getElementById('test-button');
+    const resultContainer = document.getElementById('result-container');
+
+    testButton.addEventListener('click', async () => {
+      resultContainer.innerHTML = ''; // Pulisci il risultato precedente
+
+      try {
+        const response = await axios.get('https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js');
+        const successMessage = document.createElement('p');
+        successMessage.textContent = "Connessione riuscita!";
+        successMessage.classList.add('success-message');
+        resultContainer.appendChild(successMessage);
+      } catch (error) {
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = "Connessione fallita. Errore: " + error.message;
+        errorMessage.classList.add('error-message');
+        resultContainer.appendChild(errorMessage);
+      }
+    });
+  </script>
+</body>
+</html>
